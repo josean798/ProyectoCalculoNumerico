@@ -22,7 +22,7 @@ class Digit:
             raise ValueError("El número no puede ser una cadena vacía.")
         
         chars = np.array(list(self.__number))
-        validChars = np.array(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", ".", "-", ","])
+        validChars = np.array(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f", ".", "-", ","])
         validPontingCont = 0
         contMinus = 0
         for char in chars:
@@ -37,7 +37,7 @@ class Digit:
             raise ValueError("El número no puede tener más de un punto decimal, coma o negativo.")
         
         if (not self.__number.startswith("-")) and contMinus > 0:
-            raise ValueError("El signo negagivo debe ir al inicio del número.")
+            raise ValueError("El signo negativo debe ir al inicio del número.")
         
         if self.__number.startswith(",") or self.__number.startswith("."):
             raise ValueError("El número no puede empezar con un punto decimal o coma.")
@@ -110,7 +110,7 @@ class Digit:
                     else:
                         self.__significantFigures = str(len(integerPart.rstrip("0"))) + " o " + str(len(integerPart))
                 elif decimalPart != "":
-                    self.__significantFigures = str(len(integerPart) + len(decimalPart)) + " o " + str(len(integerPart) + contAux)
+                    self.__significantFigures = str(len(integerPart) + len(decimalPart))
 
         else:
             integerPart = self.__number.lstrip("0")
@@ -187,3 +187,7 @@ class Digit:
             if char not in validSigFigures:
                 raise ValueError("Las cifras significativas deben ser un número entre 0 y 9.")
         self.__significantFigures = sig_figs
+
+x= Digit("aff14", "Hexadecimal")
+x.count_sig_figs()
+print(x.getSignificantFigures())

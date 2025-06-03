@@ -1,6 +1,23 @@
 import numpy as np
 
 class numericSystem: 
+    """
+    Clase para validar y determinar el sistema numérico de un número dado.
+
+    Atributos:
+        __number (str): El número a validar y analizar.
+        __systems (np.ndarray): Sistemas numéricos posibles para el número.
+        __isNegative (bool): Indica si el número es negativo.
+
+    Métodos:
+        __init__(number): Inicializa la clase con un número.
+        validateNumber(): Valida el formato y caracteres del número.
+        whichSystemIs(): Determina los sistemas numéricos posibles.
+        getNumber(): Retorna el número, incluyendo el signo negativo si aplica.
+        setNumber(number): Asigna un nuevo número y lo valida.
+        getSystems(): Retorna los sistemas numéricos posibles.
+        setSystems(systems): Asigna los sistemas numéricos posibles.
+    """
 
     __number = 0
     __systems = ([])
@@ -8,16 +25,26 @@ class numericSystem:
 
     
     def __init__(self, number):
+        """
+        Inicializa la clase numericSystem con un número.
+
+        Args:
+            number (str): El número a validar y analizar.
+
+        Raises:
+            ValueError: Si el input no es un string o es inválido.
+        """
         if not isinstance(number, str):
             raise ValueError("El input debe ser un string")
         self.__number = number
         self.__isNegative = False
         self.__systems
         self.validateNumber()
+        self.whichSystemIs()
 
     def validateNumber(self):
         
-        if self.__number.strip is None or self.__number.strip == "":
+        if self.__number.strip() is None or self.__number.strip() == "":
             raise ValueError("El número no puede ser vacio.")
         
         if self.__number.startswith("-"):
@@ -54,16 +81,16 @@ class numericSystem:
         for char in chars:
             if char in letters:        
                 self.__systems = np.array(["Hexadecimal"])
-                return "Hexadecimal"
+                return self.__systems
             
         for char in chars:
             if char not in ["0", "1", ",", "."]:
-                self.__systems = np.array(["Decimal, Hexadecimal"])
-                return "Decimal y Hexadecimal"
+                self.__systems = np.array(["Decimal", "Hexadecimal"])
+                return self.__systems
 
-        self.__systems = np.array(["Decimal, Binario, Hexadecimal"])    
-        return "Decimal, binario y Hexadecimal"
-
+        self.__systems = np.array(["Decimal", "Binario", "Hexadecimal"])    
+        return self.__systems
+    
     def getNumber(self):
         if self.__isNegative == True:
             self.__number = "-" + self.__number
@@ -83,7 +110,9 @@ class numericSystem:
             raise ValueError("Los sistemas deben ser un arreglo numpy")
         self.__systems = np.array(systems)
 
+x = numericSystem("10")
 
-        
-        
-        
+aux = x.getSystems()
+for i in aux:
+    print(aux[i])
+
