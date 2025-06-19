@@ -9,7 +9,7 @@ from random import randint
 def createArchive(arrayResults, archiveUtil, serialArchive):
     randomNumber = randint(1,1000-1)
     time = str(datetime.now().date()).replace(":", "-")
-    nameArchive = serialArchive + "_" + time +"_"+"serial"+ str(randomNumber) 
+    nameArchive = serialArchive + "_" + time +"_"+"serial"+ str(randomNumber)+".txt" 
 
     if arrayResults is not None:
         for i in range(len(arrayResults)):

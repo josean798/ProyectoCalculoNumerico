@@ -3,7 +3,8 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from Repositories.digit import Digit
-from Repositories.numericSystem import numericSystem 
+from Repositories.numericSystem import numericSystem
+from ValidateItem.Validate import * 
 
 def iniNumbers(arrayNumbers):
 
@@ -67,20 +68,27 @@ def processArchive(arrayNumbers, arrayResults):
         for i in range(len(arrayNumbers)):
             for j in range(len(arrayNumbers[i])):
                 text = ""
+                error = ""
                 numero = arrayNumbers[i][j]
                 if numero == "":
                     arrayResults[i][j] = ""
                     arrayNumbers[i][j] = "0"
                     continue
-                numerico = numericSystem(numero.upper())
-                text = f"El sistema de {numero} es: {numerico.whichSystemIs()}"
-                systems = numerico.getSystems()
-                for k in range(len(systems)):
-                    currentSystem = systems[k]
-                    digito = Digit(numero, currentSystem)
-                    text = text + f", tiene {digito.getSignificantFigures()} cifras significativas en el sistema {currentSystem}"
-                arrayResults[i][j] = text
-        
+                error, numerico = validEnterNumber(numero.upper())
+                if numerico == False:
+                    text = f"El numero {numero} no tiene sistema numerico"
+                    arrayNumbers[i][j] = "0"
+                    arrayResults[i][j] = text
+                    print(error)
+                else: 
+                    text = f"El sistema de {numero} es: {numerico.whichSystemIs()}"
+                    systems = numerico.getSystems()
+                    for k in range(len(systems)):
+                        currentSystem = systems[k]
+                        digito = Digit(numero, currentSystem)
+                        text = text + f", tiene {digito.getSignificantFigures()} cifras significativas en el sistema {currentSystem}"
+                    arrayResults[i][j] = text
+     
 def processResults(arrayNumbers, arrayResults, archInput, archName, serial):
     
     archiveObject = archInput.getArchive(archName)

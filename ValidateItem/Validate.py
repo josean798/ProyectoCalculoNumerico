@@ -2,15 +2,15 @@ from Repositories.numericSystem import numericSystem
 import re
 
 def validEnterNumber(number):
-
+    error = ""
     try:
-    
-        num= numericSystem.NumericSystem()
-        num.setNumber(number)
-        return num 
+        
+        num = numericSystem(number)
+        return error, num 
     
     except ValueError as e:
-        return None
+        error = f"Error: {e}"
+        return error, False
 
 def validArchiveName(archiveName):
     if re.search(r'^.+_.+_serial\d+\.bin$', archiveName):
