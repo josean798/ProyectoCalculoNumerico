@@ -85,9 +85,5 @@ class numericSystem:
             raise ValueError("Los sistemas deben ser un arreglo numpy")
         self.__systems = np.array(systems)
 
-x = numericSystem("10")
 
-aux = x.getSystems()
-for i in aux:
-    print(i)
 

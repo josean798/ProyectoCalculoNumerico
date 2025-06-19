@@ -12,6 +12,7 @@ class Digit:
         self.__significantFigures
         self.validateString()
         self.validateSystem()
+        self.count_sig_figs()
 
     def validateString(self):
 
@@ -75,7 +76,6 @@ class Digit:
 
         if self.__System == "Hexadecimal":
             self.__significantFigures = "NP"
-            print(self.__significantFigures)
         elif self.__System == "Decimal":
             if "," in self.__number:
                 self.__number = self.__number.replace(",", ".")
@@ -123,7 +123,6 @@ class Digit:
                 else:
                     self.__significantFigures = str(len(integerPart.rstrip("0"))) + " o " + str(len(integerPart))
 
-        print(self.__significantFigures)
 
     def ifIsBinario(self):
 
@@ -156,7 +155,6 @@ class Digit:
             else:
                 self.__significantFigures = str(len(integerPart))
 
-        print(self.__significantFigures)
                     
     def getNumber(self):
         return self.__number
@@ -188,6 +186,4 @@ class Digit:
                 raise ValueError("Las cifras significativas deben ser un número entre 0 y 9.")
         self.__significantFigures = sig_figs
 
-x= Digit("aff14", "Hexadecimal")
-x.count_sig_figs()
-print(x.getSignificantFigures())
+
