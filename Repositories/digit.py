@@ -18,10 +18,10 @@ class Digit:
 
         if not isinstance(self.__number, (str)):
             raise ValueError("El número debe ser un entero, flotante o cadena de texto.")
-        
+            
         if self.__number == "" or self.__number is None:
             raise ValueError("El número no puede ser una cadena vacía.")
-        
+            
         chars = np.array(list(self.__number))
         validChars = np.array(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f", ".", "-", ","])
         validPontingCont = 0
@@ -33,19 +33,18 @@ class Digit:
                 contMinus += 1
             if char not in validChars:
                 raise ValueError("Caracteres no válidos. Use dígitos 0-9 y/o letras A-F")
-            
+                
         if validPontingCont > 1 or contMinus > 1:
             raise ValueError("El número no puede tener más de un punto decimal, coma o negativo.")
-        
-        if (not self.__number.startswith("-")) and contMinus > 0:
+            
+        if len(self.__number) > 0 and self.__number[0] != "-" and contMinus > 0:
             raise ValueError("El signo negativo debe ir al inicio del número.")
         
-        if self.__number.startswith(",") or self.__number.startswith("."):
+        if len(self.__number) > 0 and (self.__number[0] == "," or self.__number[0] == "."):
             raise ValueError("El número no puede empezar con un punto decimal o coma.")
-        
-        if self.__number.endswith(",") or self.__number.endswith("."):
+            
+        if len(self.__number) > 0 and (self.__number[-1] == "," or self.__number[-1] == "."):
             raise ValueError("El número no puede terminar con un punto decimal o coma.")
-
         
     def validateSystem(self):
 

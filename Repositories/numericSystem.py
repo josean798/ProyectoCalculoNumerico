@@ -3,7 +3,7 @@ import numpy as np
 class numericSystem: 
 
     __number = 0
-    __systems = ([])
+    __systems = (np.array([]))
     __isNegative = False
 
     
@@ -22,7 +22,7 @@ class numericSystem:
         if self.__number.strip() is None or self.__number.strip() == "":
             raise ValueError("El número no puede ser vacio.")
         
-        if self.__number.startswith("-"):
+        if len(self.__number) > 0 and self.__number[0] == "-":
             self.__number = self.__number[1:]
             self.__isNegative = True
         
@@ -37,18 +37,15 @@ class numericSystem:
                 contMinus += 1
             if char not in validChars:
                 raise ValueError("Caracteres no válidos. Use dígitos 0-9 y/o letras A-F")
-        if validPontingCont > 1 or contMinus > 1:
+        if validPontingCont > 1 or contMinus > 0:
             raise ValueError("El número no puede tener más de un punto decimal, coma o negativo.")
         
-        if (not self.__number.startswith("-")) and contMinus > 0:
-            raise ValueError("El signo negagivo debe ir al inicio del número.")
-        
-        if self.__number.startswith(",") or self.__number.startswith("."):
+        if len(self.__number) > 0 and (self.__number[0] == "," or self.__number[0] == "."):
             raise ValueError("El número no puede empezar con un punto decimal o coma.")
         
-        if self.__number.endswith(",") or self.__number.endswith("."):
+        if len(self.__number) > 0 and (self.__number[-1] == "," or self.__number[-1] == "."):
             raise ValueError("El número no puede terminar con un punto decimal o coma.")
-
+        
     def whichSystemIs(self):
         
         chars = np.array(list(self.__number))
