@@ -2,8 +2,7 @@ import numpy as np
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
-from Repositories.digit import Digit
-from Repositories.numericSystem import numericSystem
+from datetime import datetime
 from ValidateItem.Validate import * 
 
 def iniNumbers(arrayNumbers):
@@ -61,33 +60,11 @@ def attachData(archivo, arraynumbers):
             arraynumbers[fila][col] = ""    
         fila += 1
                        
-def processArchive(arrayNumbers, arrayResults):
-    systems = np.array([], dtype=object)
+def processArchive(arrayNumbers, arrayResults, serial, date):
     
-    if arrayNumbers is not None and systems is not None:
-        for i in range(len(arrayNumbers)):
-            for j in range(len(arrayNumbers[i])):
-                text = ""
-                error = ""
-                numero = arrayNumbers[i][j]
-                if numero == "":
-                    arrayResults[i][j] = ""
-                    arrayNumbers[i][j] = "0"
-                    continue
-                error, numerico = validEnterNumber(numero.upper())
-                if numerico == False:
-                    text = f"El numero {numero} no tiene sistema numerico"
-                    arrayNumbers[i][j] = "0"
-                    arrayResults[i][j] = text
-                    print(error)
-                else: 
-                    text = f"El sistema de {numero} es: {numerico.whichSystemIs()}"
-                    systems = numerico.getSystems()
-                    for k in range(len(systems)):
-                        currentSystem = systems[k]
-                        digito = Digit(numero, currentSystem)
-                        text = text + f", tiene {digito.getSignificantFigures()} cifras significativas en el sistema {currentSystem}"
-                    arrayResults[i][j] = text
+    
+    if arrayNumbers is not None and arrayResults is not None:
+        arrayNumbers, arrayResults = validEnterNumber(arrayNumbers, arrayResults, serial, date)
      
 def processResults(arrayNumbers, arrayResults, archInput, archName, serial):
     
@@ -97,21 +74,11 @@ def processResults(arrayNumbers, arrayResults, archInput, archName, serial):
     filas, columnas = filasCol[0], filasCol[1]
     arrayNumbers = np.empty((filas, columnas), dtype=object)
     arrayResults = np.empty((filas, columnas), dtype=object)
+    date = str(datetime.now().date()).replace(":", "-")
     
     iniNumbers(arrayNumbers)
     iniResults(arrayResults)
     attachData(archiveObject, arrayNumbers)
-    processArchive(arrayNumbers, arrayResults)
+    processArchive(arrayNumbers, arrayResults, serial, date)
     
     return arrayNumbers, arrayResults, serial, archiveObject
-    
-            
-        
-             
-                    
-
-
-
-
-
-    
