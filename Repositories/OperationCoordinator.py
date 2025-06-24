@@ -36,5 +36,3 @@ class CoordinadorOperaciones:
     
     def getResults(self):
         return self.__ops.getRecord()
-
-

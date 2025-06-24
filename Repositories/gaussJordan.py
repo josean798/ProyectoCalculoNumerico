@@ -10,9 +10,9 @@ class GaussJordan:
         self.__matrix = np.array(matrix, dtype=float)
         self.__pivots = np.array([0.0] * len(self.__matrix))
         self.__vector = np.array([2] * len(self.__matrix))
-        self.validate_matrix()
+        self.validateMatrix()
 
-    def validate_matrix(self):
+    def validateMatrix(self):
         if not isinstance(self.__matrix, (np.ndarray)):
             raise ValueError("La matriz debe ser un arreglo de NumPy.")
         
@@ -66,12 +66,3 @@ class GaussJordan:
 
     def setMatrix(self, matriz):
         self.__matrix=matriz
-
-
-matrix = [[4, -1, 0], [-1, 4, -1], [0, -1, 4]]
-    
-solver = GaussJordan(matrix)
-solution = solver.solve()
-    
-print("Los valores de las variables son:", solution)
-    

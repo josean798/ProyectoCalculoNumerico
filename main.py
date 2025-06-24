@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from Process.ProcessMain import ProcessMain
-from Structure.MyDate import myDate
+from Structure.myDate import myDate
 from Structure.myReplace import myReplace
 
 
@@ -17,5 +17,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

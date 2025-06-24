@@ -1,4 +1,4 @@
-class traslator:
+class translator:
 
     __num=""
 
@@ -6,15 +6,15 @@ class traslator:
         if not isinstance(number, str):
             raise ValueError("El input debe ser un string")
         self.__num = number
-        self.validate_num()
+        self.validateNum()
 
-    def validate_num(self):
-        valid_chars = set("0123456789abcdefABCDEF")
-        if not all(char in valid_chars for char in self.__num):
+    def validateNum(self):
+        validChars = set("0123456789abcdefABCDEF")
+        if not all(char in validChars for char in self.__num):
             raise ValueError("El input debe ser un número hexadecimal válido")
 
-    def tralator(self):
-        conter=0
+    def translator(self):
+        counter=0
         newNum = 0
         for number in self.__num[::-1]:
             if number=="A" or number=="a":
@@ -29,15 +29,10 @@ class traslator:
                 number = 14
             elif number=="F" or number=="f":
                 number = 15
-            newNum += int(number) * (16 ** conter)
-            conter += 1
+            newNum += int(number) * (16 ** counter)
+            counter += 1
             print(newNum)
         self.__num = str(newNum)
 
     def getNumber(self):
         return self.__num
-
-
-x= traslator("3f")
-x.tralator()
-print(x.getNumber())

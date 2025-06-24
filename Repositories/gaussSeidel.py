@@ -13,11 +13,11 @@ class GaussSeidel:
         self.__maxIterations = 1000
         self.n = len(self.__matrix)
         self.__vector = np.array([2] * self.n)
-        self.validate_matrix()
+        self.validateMatrix()
         if not self.isDiagonallyDominant():
             self.makeDiagonallyDominant()
 
-    def validate_matrix(self):
+    def validateMatrix(self):
         if not isinstance(self.__matrix, (np.ndarray)):
                 raise ValueError("La matriz debe ser un arreglo de NumPy.")
         
@@ -114,13 +114,3 @@ class GaussSeidel:
 
     def setMaxIterations(self, maxIterations):
         self.__maxIterations=maxIterations
-
-A = np.array([[4, -1, 0],[-1, 4, -1],[0, -1, 4]],  dtype=float)
-b = np.array([15, 10, 10, 10], dtype=float)
-
-gs = GaussSeidel(A)
-solution = gs.solve()
-print("La solución es:", solution)
-
-
-

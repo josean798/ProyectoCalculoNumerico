@@ -201,6 +201,3 @@ class ElementalOperations:
             return self.hexadecimal()
         elif self.__System == 'Decimal':
             return self.decimal()
-
-
-

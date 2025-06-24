@@ -12,7 +12,7 @@ class Digit:
         self.__significantFigures
         self.validateString()
         self.validateSystem()
-        self.count_sig_figs()
+        self.countSigFigs()
 
     def validateString(self):
 
@@ -71,7 +71,7 @@ class Digit:
                     raise ValueError("El número no es válido en el sistema Binario.")
 
 
-    def count_sig_figs(self):
+    def countSigFigs(self):
 
         if self.__System == "Hexadecimal":
             self.__significantFigures = "NP"
@@ -176,13 +176,11 @@ class Digit:
     def getSignificantFigures(self):
         return self.__significantFigures
     
-    def setSignificantFigures(self, sig_figs):
-        if not isinstance(sig_figs, str):
+    def setSignificantFigures(self, sigFigs):
+        if not isinstance(sigFigs, str):
             raise ValueError("Las cifras significativas deben ser un string")
         validSigFigures = np.array(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-        for char in sig_figs:
+        for char in sigFigs:
             if char not in validSigFigures:
                 raise ValueError("Las cifras significativas deben ser un número entre 0 y 9.")
-        self.__significantFigures = sig_figs
-
-
+        self.__significantFigures = sigFigs
