@@ -66,7 +66,7 @@ def processArchive(arrayNumbers, arrayResults, serial, date):
     if arrayNumbers is not None and arrayResults is not None:
         arrayNumbers, arrayResults = validEnterNumber(arrayNumbers, arrayResults, serial, date)
      
-def processResults(arrayNumbers, arrayResults, archInput, archName, serial):
+def processResults(arrayNumbers, arrayResults, archInput, archName, serial, date):
     
     archiveObject = archInput.getArchive(archName)
     serial = archInput.getSerial(archName)
@@ -74,7 +74,7 @@ def processResults(arrayNumbers, arrayResults, archInput, archName, serial):
     fil, col = filcol[0], filcol[1]
     arrayNumbers = np.empty((fil, col), dtype=object)
     arrayResults = np.empty((fil, col), dtype=object)
-    date = str(datetime.now().date()).replace(":", "-")
+    
     
     iniNumbers(arrayNumbers)
     iniResults(arrayResults)

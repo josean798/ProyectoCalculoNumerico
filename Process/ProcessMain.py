@@ -20,7 +20,7 @@ def ProcessMain(routeInput, routeOutput, date):
             continue
         if validArchiveName(archiveName) and validContentArchive(archiveUtilInput.getArchive(archiveName), archiveName):
             
-            arrayNumbers, arrayResults, serial, archObject = processResults(arrayNumbers, arrayResults, archiveUtilInput, archiveName, serial)
+            arrayNumbers, arrayResults, serial, archObject = processResults(arrayNumbers, arrayResults, archiveUtilInput, archiveName, serial, date)
                 
             storeMain(arrayResults, serial, archiveUtilOut, date)
             archObject.close()
