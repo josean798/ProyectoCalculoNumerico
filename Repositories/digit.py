@@ -13,7 +13,7 @@ class Digit:
         self.__significantFigures
         self.validateString()
         self.validateSystem()
-        self.count_sig_figs()
+        self.countSigFigs()
 
     def validateString(self):
 
@@ -72,7 +72,7 @@ class Digit:
                     raise ValueError("El número no es válido en el sistema Binario.")
 
 
-    def count_sig_figs(self):
+    def countSigFigs(self):
 
         if self.__System == "Hexadecimal":
             self.__significantFigures = "NP"

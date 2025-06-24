@@ -36,7 +36,6 @@ class GaussJordan:
         rows = len(self.__matrix)
         cols = len(self.__matrix[0])  
         augmentedMatrix = np.array([[self.__matrix[i][j] for j in range(cols)] + [self.__vector[i]] for i in range(rows)])
-        print(augmentedMatrix)
 
         for i in range(rows):
             pivot = augmentedMatrix[i, i]
@@ -52,7 +51,6 @@ class GaussJordan:
                     factor = augmentedMatrix[j, i]
                     augmentedMatrix[j] = augmentedMatrix[j] - factor * augmentedMatrix[i]
         
-        print(self.__pivots)
         return augmentedMatrix[:, -1]
     
     def getMatrix(self):
@@ -66,3 +64,6 @@ class GaussJordan:
 
     def setMatrix(self, matriz):
         self.__matrix=matriz
+
+
+  

@@ -1,7 +1,7 @@
 import numpy as np
 import random
-from MatrixOperations.MatrixElementalOperations import MatrixElementalOperations
-class CoordinadorOperaciones:
+from Repositories.MatrixOperations.MatrixElementalOperations import MatrixElementalOperations
+class matrixOperations:
     __matrixInicial = None
     __ops = None
     
@@ -36,3 +36,4 @@ class CoordinadorOperaciones:
     
     def getResults(self):
         return self.__ops.getRecord()
+    

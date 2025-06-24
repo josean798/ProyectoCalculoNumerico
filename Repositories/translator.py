@@ -9,29 +9,33 @@ class translator:
         self.validateNum()
 
     def validateNum(self):
-        validChars = set("0123456789abcdefABCDEF")
-        if not all(char in validChars for char in self.__num):
+        valid_chars = set("0123456789abcdefABCDEF,.")
+        if not all(char in valid_chars for char in self.__num):
             raise ValueError("El input debe ser un número hexadecimal válido")
 
-    def translator(self):
-        counter=0
+    def isHexadecimal(self):
+        return any(c in "abcdefABCDEF" for c in self.__num)
+
+    def translate(self):
+        if not self.isHexadecimal():
+            return
+        conter = 0
         newNum = 0
         for number in self.__num[::-1]:
-            if number=="A" or number=="a":
+            if number == "A" or number == "a":
                 number = 10
-            elif number=="B" or number=="b":
+            elif number == "B" or number == "b":
                 number = 11
-            elif number=="C" or number=="c":
+            elif number == "C" or number == "c":
                 number = 12
-            elif number=="D" or number=="d":
+            elif number == "D" or number == "d":
                 number = 13
-            elif number=="E" or number=="e":
+            elif number == "E" or number == "e":
                 number = 14
-            elif number=="F" or number=="f":
+            elif number == "F" or number == "f":
                 number = 15
-            newNum += int(number) * (16 ** counter)
-            counter += 1
-            print(newNum)
+            newNum += int(number) * (16 ** conter)
+            conter += 1
         self.__num = str(newNum)
 
     def getNumber(self):
