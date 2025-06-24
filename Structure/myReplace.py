@@ -59,3 +59,4 @@ class myReplace:
     
     def __str__(self):
         return self.__originalString
+    

@@ -1,6 +1,6 @@
 import time
 
-class MyDate:
+class myDate:
     
     __year = 0
     __month = 0

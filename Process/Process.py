@@ -20,45 +20,45 @@ def iniResults(arrayResults):
                 arrayResults[i][j] = ""                
 
 
-def archiveQuantities(archivo):
+def archiveQuantities(archive):
 
-    filasCol = np.array([0,0])
+    filCol = np.array([0,0])
 
-    if(archivo == None):
+    if(archive == None):
         print("Error al abrir dicho archivo")
-        return filasCol
+        return filCol
 
-    cont = 0
-    band = 0
+    count = 0
+    flag = 0
     aux = 0
 
-    for i in archivo:
-        cont += 1
-        campos = np.array([campo for campo in i.strip().split("#") if campo != ""], dtype=object)
+    for i in archive:
+        count += 1
+        camp = np.array([camps for camps in i.strip().split("#") if camps != ""], dtype=object)
 
-        if band == 0:
-            aux = len(campos)
-            band = 1
-        elif (len(campos) > aux):
-            aux = len(campos)
+        if flag == 0:
+            aux = len(camp)
+            flag = 1
+        elif (len(camp) > aux):
+            aux = len(camp)
 
-    filasCol[0] = cont  
-    filasCol[1] = aux
+    filCol[0] = count  
+    filCol[1] = aux
     
-    return filasCol
+    return filCol
 
 
-def attachData(archivo, arraynumbers):
-    archivo.seek(0)
-    fila = 0
-    for linea in archivo:
+def attachData(archive, arraynumbers):
+    archive.seek(0)
+    fil = 0
+    for linea in archive:
         campos = np.array([campo for campo in linea.strip().split("#") if campo != ""], dtype=arraynumbers.dtype)
         for col in range(len(campos)):
-            arraynumbers[fila][col] = campos[col]
+            arraynumbers[fil][col] = campos[col]
 
         for col in range(len(campos), arraynumbers.shape[1]):
-            arraynumbers[fila][col] = ""    
-        fila += 1
+            arraynumbers[fil][col] = ""    
+        fil += 1
                        
 def processArchive(arrayNumbers, arrayResults, serial, date):
     
@@ -70,10 +70,10 @@ def processResults(arrayNumbers, arrayResults, archInput, archName, serial):
     
     archiveObject = archInput.getArchive(archName)
     serial = archInput.getSerial(archName)
-    filasCol = archiveQuantities(archiveObject)
-    filas, columnas = filasCol[0], filasCol[1]
-    arrayNumbers = np.empty((filas, columnas), dtype=object)
-    arrayResults = np.empty((filas, columnas), dtype=object)
+    filcol = archiveQuantities(archiveObject)
+    fil, col = filcol[0], filcol[1]
+    arrayNumbers = np.empty((fil, col), dtype=object)
+    arrayResults = np.empty((fil, col), dtype=object)
     date = str(datetime.now().date()).replace(":", "-")
     
     iniNumbers(arrayNumbers)

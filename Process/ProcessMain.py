@@ -3,11 +3,11 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from composables.StoreMain import storeMain
-from Process.Process import processResults, archiveQuantities, iniNumbers, iniResults, attachData, processArchive
+from Process.Process import processResults
 from Repositories.ArchiveUtil import ArchiveUtil
 from ValidateItem.Validate import validArchiveName, validContentArchive
 
-def ProcessMain(routeInput, routeOutput):
+def ProcessMain(routeInput, routeOutput, date):
     arrayNumbers = None
     arrayResults = None
     archObject = None
@@ -22,7 +22,7 @@ def ProcessMain(routeInput, routeOutput):
             
             arrayNumbers, arrayResults, serial, archObject = processResults(arrayNumbers, arrayResults, archiveUtilInput, archiveName, serial)
                 
-            storeMain(arrayResults, serial, archiveUtilOut)
+            storeMain(arrayResults, serial, archiveUtilOut, date)
             archObject.close()
     
     

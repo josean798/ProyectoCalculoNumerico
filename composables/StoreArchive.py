@@ -1,15 +1,10 @@
-from Repositories.digit import Digit
-from Repositories.numericSystem import numericSystem 
-import numpy as np
-from datetime import datetime
 from random import randint
 
 
 
-def createArchive(arrayResults, archiveUtil, serialArchive):
+def createArchive(arrayResults, archiveUtil, serialArchive, date):
     randomNumber = randint(1,1000-1)
-    time = str(datetime.now().date()).replace(":", "-")
-    nameArchive = serialArchive + "_" + time +"_"+"serial"+ str(randomNumber)+".txt" 
+    nameArchive = serialArchive + "_" + date +"_"+"serial"+ str(randomNumber)+".txt" 
 
     if arrayResults is not None:
         for i in range(len(arrayResults)):

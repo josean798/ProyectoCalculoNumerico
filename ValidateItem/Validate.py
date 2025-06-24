@@ -1,5 +1,6 @@
 from Repositories.numericSystem import * 
 from Repositories.digit import *
+from Repositories.elementalOperations import *
 import re
 import numpy as np 
 
@@ -10,28 +11,34 @@ def validEnterNumber(arrayNumbers, arrayResults, serial, date):
         for i in range(len(arrayNumbers)):
             for j in range(len(arrayNumbers[i])):
                 text = ""
-                numero = arrayNumbers[i][j]
+                number = arrayNumbers[i][j]
                 try:
-                    if numero == "":
+                    if isinstance(number, str):
+                        if ',' in number and '.' not in number:
+                            replace = myReplace(number)
+                            number = replace.getReplace(',', '.')                            
+                    if number == "":
                         arrayResults[i][j] = ""
                         arrayNumbers[i][j] = "0"
                         continue
-                    numerico = numericSystem(numero.upper())
-                    text = f"El sistema de {numero} es: {numerico.whichSystemIs()}"
+                    numerico = numericSystem(number.upper())
+                    text = f"El sistema de {number} es: {numerico.whichSystemIs()}"
                     systems = numerico.getSystems()
                     for k in range(len(systems)):
                         currentSystem = systems[k]
-                        digito = Digit(numero, currentSystem)
+                        digito = Digit(number, currentSystem)
                         text = text + f", tiene {digito.getSignificantFigures()} cifras significativas en el sistema {currentSystem}"
+                        elemental = ElementalOperations(number.upper(), currentSystem)
+                        text = text + f", operaciones elementales: {elemental.finalResult()}"
                     arrayResults[i][j] = text
                 except Exception as e:
                     nameError = type(e).__name__
                     exception = str(e)
-                    data = f"{numero}"
+                    data = f"{number}"
                     location = f"Fila: {i}, Colimna: {j}"
                     error = f"{nameError}_{date}_{serial}:[{exception}/{data}/{location}]"
                     print(error)    
-                    arrayResults[i][j] = f"El numero {numero} no tiene sistema numerico"
+                    arrayResults[i][j] = f"El numero {number} no tiene sistema numerico"
                     arrayNumbers[i][j] = "0"
                 
     return arrayNumbers, arrayResults
