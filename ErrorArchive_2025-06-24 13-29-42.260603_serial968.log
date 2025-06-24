@@ -1,0 +1,4 @@
+ValueError_2025-06-24 13-29-42.260603_serial1234:[la matriz tiene infinitas soluciones/123 87897989 239 0984748 162625 0 0 0/validMatrixGaussJordan()]
+ValueError_2025-06-24 13-29-42.260603_serial1234:[Caracteres no válidos. Use dígitos 0-9 y/o letras A-F/z%/validEnterNumber()]
+ValueError_2025-06-24 13-29-42.260603_serial1234:[El número no es válido en el sistema Binario./-10000/validEnterNumber()]
+ValueError_2025-06-24 13-29-42.260603_serial1233:[la matriz tiene infinitas soluciones/10111 44820 190.88 20 110022 11206502 411 00.564 7000000 0 0 19.701 0.1304332 0.000343003 10 20 09 11491004 838775 48983940/validMatrixGaussJordan()]

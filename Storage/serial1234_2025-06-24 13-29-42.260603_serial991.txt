@@ -1,0 +1,9 @@
+El sistema de 123 es: ['Decimal' 'Hexadecimal'], tiene 3 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 87897989 es: ['Decimal' 'Hexadecimal'], tiene 8 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de ef es: ['Hexadecimal'], tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 0984748 es: ['Decimal' 'Hexadecimal'], tiene 6 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 162625 es: ['Decimal' 'Hexadecimal'], tiene 6 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El numero -10000 no tiene sistema numerico
+El numero z% no tiene sistema numerico
+Operaciones elementales:Intercambio fila 0 con fila 1, Multiplicar fila 1 por -1, Sumar a fila 0 el múltiplo 3 de fila 1, 
+Resultados de Gauss:I, n, f, i, n, i, t, a, s,  , s, o, l, u, c, i, o, n, e, s,  , o,  , n, o,  , t, i, e, n, e,  , s, o, l, u, c, i, ó, n, 

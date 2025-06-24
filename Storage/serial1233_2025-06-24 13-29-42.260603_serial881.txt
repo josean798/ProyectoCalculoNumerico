@@ -1,0 +1,21 @@
+El sistema de 10111 es: ['Decimal' 'Binario' 'Hexadecimal'], tiene 5 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene 5 cifras significativas en el sistema Binario, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de AF14 es: ['Hexadecimal'], tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 190.88 es: ['Decimal' 'Hexadecimal'], tiene 5 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 20 es: ['Decimal' 'Hexadecimal'], tiene 1 o 2 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 110022 es: ['Decimal' 'Hexadecimal'], tiene 6 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de aaff66 es: ['Hexadecimal'], tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 19b es: ['Hexadecimal'], tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 00.564 es: ['Decimal' 'Hexadecimal'], tiene 3 o 3 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: + */
+El sistema de 7000000 es: ['Decimal' 'Hexadecimal'], tiene 1 o 7 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 0 es: ['Decimal' 'Binario' 'Hexadecimal'], tiene 1 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene 1 cifras significativas en el sistema Binario, operaciones elementales: + */, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 19.701 es: ['Decimal' 'Hexadecimal'], tiene 5 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 0.1304332 es: ['Decimal' 'Hexadecimal'], tiene 7 o 7 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 0.000343003 es: ['Decimal' 'Hexadecimal'], tiene 6 o 6 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 10 es: ['Decimal' 'Binario' 'Hexadecimal'], tiene 1 o 2 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene 1 cifras significativas en el sistema Binario, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 20 es: ['Decimal' 'Hexadecimal'], tiene 1 o 2 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 09 es: ['Decimal' 'Hexadecimal'], tiene 1 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de af56bc es: ['Hexadecimal'], tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de ccc77 es: ['Hexadecimal'], tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+El sistema de 48983940 es: ['Decimal' 'Hexadecimal'], tiene 7 o 8 cifras significativas en el sistema Decimal, operaciones elementales: +-*/, tiene NP cifras significativas en el sistema Hexadecimal, operaciones elementales: +-*/
+Operaciones elementales:Intercambio fila 0 con fila 1, Multiplicar fila 0 por 4, Sumar a fila 1 el múltiplo -2 de fila 0, 
+Resultados de Gauss:I, n, f, i, n, i, t, a, s,  , s, o, l, u, c, i, o, n, e, s,  , o,  , n, o,  , t, i, e, n, e,  , s, o, l, u, c, i, ó, n, 
