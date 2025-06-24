@@ -1,4 +1,5 @@
 import numpy as np
+from Structure.myReplace import myReplace
 
 class Digit:
 
@@ -12,7 +13,7 @@ class Digit:
         self.__significantFigures
         self.validateString()
         self.validateSystem()
-        self.countSigFigs()
+        self.count_sig_figs()
 
     def validateString(self):
 
@@ -71,23 +72,25 @@ class Digit:
                     raise ValueError("El número no es válido en el sistema Binario.")
 
 
-    def countSigFigs(self):
+    def count_sig_figs(self):
 
         if self.__System == "Hexadecimal":
             self.__significantFigures = "NP"
         elif self.__System == "Decimal":
             if "," in self.__number:
-                self.__number = self.__number.replace(",", ".")
+                replacer = myReplace(self.__number)
+                self.__number = replacer.getReplace(",", ".")
             self.ifIsDecimal()
         elif self.__System == "Binario":
             if "," in self.__number:
-                self.__number = self.__number.replace(",", ".")
+                replacer = myReplace(self.__number)
+                self.__number = replacer.getReplace(",", ".")
             self.ifIsBinario()
     
 
     def ifIsDecimal(self):
 
-        if self.__number.startswith("-"):
+        if len(self.__number) > 0 and self.__number[0] == "-":
                 self.__number = self.__number[1:]
         if float(self.__number) == 0:
                     self.__significantFigures = "1"
@@ -125,7 +128,7 @@ class Digit:
 
     def ifIsBinario(self):
 
-        if self.__number.startswith("-"):
+        if len(self.__number) > 0 and self.__number[0] == "-":
             self.__number = self.__number[1:]
         if float(self.__number) == 0:
             self.__significantFigures = "1"
@@ -176,11 +179,13 @@ class Digit:
     def getSignificantFigures(self):
         return self.__significantFigures
     
-    def setSignificantFigures(self, sigFigs):
-        if not isinstance(sigFigs, str):
+    def setSignificantFigures(self, sig_figs):
+        if not isinstance(sig_figs, str):
             raise ValueError("Las cifras significativas deben ser un string")
         validSigFigures = np.array(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-        for char in sigFigs:
+        for char in sig_figs:
             if char not in validSigFigures:
                 raise ValueError("Las cifras significativas deben ser un número entre 0 y 9.")
-        self.__significantFigures = sigFigs
+        self.__significantFigures = sig_figs
+
+
