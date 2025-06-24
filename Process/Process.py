@@ -19,6 +19,12 @@ def iniResults(arrayResults):
             for j in range(len(arrayResults[i])):
                 arrayResults[i][j] = ""                
 
+def iniConverted(arrayConverted):
+
+    if arrayConverted is not None:
+        for i in range(len(arrayConverted)):
+            for j in range(len(arrayConverted[i])):
+                arrayConverted[i][j] = ""
 
 def archiveQuantities(archive):
 
@@ -59,26 +65,46 @@ def attachData(archive, arraynumbers):
         for col in range(len(campos), arraynumbers.shape[1]):
             arraynumbers[fil][col] = ""    
         fil += 1
-                       
-def processArchive(arrayNumbers, arrayResults, serial, date):
-    
-    
+
+def methodProcess():
+    text = "Ingrese que metodo desea usar: \n1. Gauss Jordan\n2. Gauss Seidel\nIngrese el indice: "
+    index = validInput(text)
+    return index
+
+def processArchive(arrayNumbers, arrayResults, arrayConverted, errorList, arraysList, serial, date):
+
+
     if arrayNumbers is not None and arrayResults is not None:
-        arrayNumbers, arrayResults = validEnterNumber(arrayNumbers, arrayResults, serial, date)
-     
-def processResults(arrayNumbers, arrayResults, archInput, archName, serial, date):
-    
+        arrayNumbers, arrayResults, arrayConverted = validEnterNumber(arrayNumbers, arrayResults, arrayConverted, serial, date, errorList)
+        arraysList.insert(arrayConverted)
+        
+def methodSelected(index, arrayConverted, errorList, serial, date):
+    result = None
+    if index == 1:
+        result = validMatrixGaussJordan(arrayConverted, errorList, serial, date)
+        return result
+    elif index == 2:
+        result = validMatrixGaussSeidel(arrayConverted, errorList, serial, date)
+        return result
+def elementalOperations(arrayConverted, errorList, serial, date):
+    elementalResult = validElementalMatrixOperations(arrayConverted, errorList, serial, date)
+    return elementalResult
+
+def processResults(index, result, errorList, arraysList, arrayNumbers, arrayResults, arrayConverted, archInput, archName, serial, date, elementalResult):
+
     archiveObject = archInput.getArchive(archName)
     serial = archInput.getSerial(archName)
     filcol = archiveQuantities(archiveObject)
     fil, col = filcol[0], filcol[1]
     arrayNumbers = np.empty((fil, col), dtype=object)
     arrayResults = np.empty((fil, col), dtype=object)
-    
+    arrayConverted = np.empty((fil, col), dtype=object)
     
     iniNumbers(arrayNumbers)
     iniResults(arrayResults)
+    iniConverted(arrayConverted)
     attachData(archiveObject, arrayNumbers)
-    processArchive(arrayNumbers, arrayResults, serial, date)
-    
-    return arrayNumbers, arrayResults, serial, archiveObject
+    processArchive(arrayNumbers, arrayResults, arrayConverted, errorList, arraysList, serial, date)
+    elementalResult = elementalOperations(arrayConverted, errorList, serial, date)
+    result = methodSelected(index, arrayConverted, errorList, serial, date)
+    return elementalResult,result, arrayNumbers, arrayResults, arrayConverted, serial, archiveObject, errorList, arraysList

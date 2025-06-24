@@ -81,6 +81,3 @@ class numericSystem:
         if not isinstance(systems, np.ndarray) and not isinstance(systems, list):
             raise ValueError("Los sistemas deben ser un arreglo numpy")
         self.__systems = np.array(systems)
-
-
-

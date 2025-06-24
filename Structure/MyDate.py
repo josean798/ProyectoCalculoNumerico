@@ -150,5 +150,3 @@ class myDate:
     
     def __repr__(self):
         return (f"MyDate(year={self.__year}, month={self.__month}, day={self.__day}, "f"hour={self.__hour}, minute={self.__minute}, second={self.__second}, "f"microsecond={self.__microsecond})")
-
-
