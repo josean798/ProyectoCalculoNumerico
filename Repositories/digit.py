@@ -64,11 +64,15 @@ class Digit:
             for char in chars:
                 if char not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",", "-"]:
                     raise ValueError("El número no es válido en el sistema Decimal.")
+                
+        if self.__System == "Hexadecimal":
+            if "-" in self.__number:
+                raise ValueError("No se permiten números negativos en el sistema Hexadecimal.")        
             
         if self.__System == "Binario":
             chars = np.array(list(self.__number))
             for char in chars:
-                if char not in ["0", "1", ".", ",", "-"]:
+                if char not in ["0", "1", ".", ","]:
                     raise ValueError("El número no es válido en el sistema Binario.")
 
 
