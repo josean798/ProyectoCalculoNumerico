@@ -1,8 +1,7 @@
-from composables.StoreArchive import createArchive
+from composables.StoreArchive import createArchive, createArchiveError
 
 
-def storeMain(arrayResults, serial, archiveUtil, date):
+def storeMain(arrayResults, serial, archiveUtil, routeLog, date, errorList, resultGauss, elementalOperations):
 
-    createArchive(arrayResults, archiveUtil, serial, date)
-    
-
+    createArchive(arrayResults, archiveUtil, serial, resultGauss, elementalOperations, date)
+    createArchiveError(errorList, routeLog, date)
