@@ -1,4 +1,5 @@
 import numpy as np
+from Structure.myReplace import myReplace
 
 class Digit:
 
@@ -12,7 +13,7 @@ class Digit:
         self.__significantFigures
         self.validateString()
         self.validateSystem()
-        self.count_sig_figs()
+        self.countSigFigs()
 
     def validateString(self):
 
@@ -63,31 +64,37 @@ class Digit:
             for char in chars:
                 if char not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",", "-"]:
                     raise ValueError("El número no es válido en el sistema Decimal.")
+                
+        if self.__System == "Hexadecimal":
+            if "-" in self.__number:
+                raise ValueError("No se permiten números negativos en el sistema Hexadecimal.")        
             
         if self.__System == "Binario":
             chars = np.array(list(self.__number))
             for char in chars:
-                if char not in ["0", "1", ".", ",", "-"]:
+                if char not in ["0", "1", ".", ","]:
                     raise ValueError("El número no es válido en el sistema Binario.")
 
 
-    def count_sig_figs(self):
+    def countSigFigs(self):
 
         if self.__System == "Hexadecimal":
             self.__significantFigures = "NP"
         elif self.__System == "Decimal":
             if "," in self.__number:
-                self.__number = self.__number.replace(",", ".")
+                replacer = myReplace(self.__number)
+                self.__number = replacer.getReplace(",", ".")
             self.ifIsDecimal()
         elif self.__System == "Binario":
             if "," in self.__number:
-                self.__number = self.__number.replace(",", ".")
+                replacer = myReplace(self.__number)
+                self.__number = replacer.getReplace(",", ".")
             self.ifIsBinario()
     
 
     def ifIsDecimal(self):
 
-        if self.__number.startswith("-"):
+        if len(self.__number) > 0 and self.__number[0] == "-":
                 self.__number = self.__number[1:]
         if float(self.__number) == 0:
                     self.__significantFigures = "1"
@@ -125,7 +132,7 @@ class Digit:
 
     def ifIsBinario(self):
 
-        if self.__number.startswith("-"):
+        if len(self.__number) > 0 and self.__number[0] == "-":
             self.__number = self.__number[1:]
         if float(self.__number) == 0:
             self.__significantFigures = "1"
