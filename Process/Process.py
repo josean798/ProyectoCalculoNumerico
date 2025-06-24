@@ -66,6 +66,11 @@ def attachData(archive, arraynumbers):
             arraynumbers[fil][col] = ""    
         fil += 1
 
+def numberProcess():
+    text = "Como prefiere operar \n1.Con numeros \n2.Matrices"
+    index = validInput(text)
+    return index
+
 def methodProcess():
     text = "Ingrese que metodo desea usar: \n1. Gauss Jordan\n2. Gauss Seidel\nIngrese el indice: "
     index = validInput(text)

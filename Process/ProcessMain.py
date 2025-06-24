@@ -20,6 +20,7 @@ def ProcessMain(routeInput, routeOutput, routeLog, date, errorList, arraysList):
     arhiveUtilLog = ArchiveUtil(routeLog)
     
     index = methodProcess()
+    indexOperations = methodProcess()
     for archiveName in archiveUtilInput.getDirectoriesList():
         if archiveName == ".gitkeep": 
             continue
@@ -27,8 +28,10 @@ def ProcessMain(routeInput, routeOutput, routeLog, date, errorList, arraysList):
 
             elementalOperations, resultGauss, arrayNumbers, arrayResults, arrayConverted, serial, archObject, errorList, arraysList = processResults(index, resultGauss, errorList, arraysList, arrayNumbers, arrayResults, arrayConverted, archiveUtilInput, archiveName, serial, date, elementalOperations)
             
-            storeMain(arrayResults, serial, archiveUtilOut, arhiveUtilLog, date, errorList, resultGauss, elementalOperations)
+            #storeMain(arrayResults, serial, archiveUtilOut, arhiveUtilLog, date, errorList, resultGauss, elementalOperations)
             archObject.close()
 
     for i in errorList:
+        print(i)
+    for i in arraysList:
         print(i)

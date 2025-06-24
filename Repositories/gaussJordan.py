@@ -15,6 +15,9 @@ class GaussJordan:
     def validateMatrix(self):
         if not isinstance(self.__matrix, (np.ndarray)):
             raise ValueError("La matriz debe ser un arreglo de NumPy.")
+
+        if len(self.__matrix) < len(self.__matrix[0]):
+            raise ValueError("la matriz tiene infinitas soluciones")
         
         firstRowLenght=len(self.__matrix[0])    
         for row in self.__matrix:

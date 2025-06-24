@@ -56,13 +56,13 @@ def validEnterNumber(arrayNumbers, arrayResults, arrayConverted, serial, date, e
                         arrayNumbers[i][j] = "0"
                         arrayConverted[i][j] = "0"
                         continue
-                    numerico = numericSystem(number.upper())
-                    text = f"El sistema de {number} es: {numerico.whichSystemIs()}"
-                    systems = numerico.getSystems()
+                    numeric = numericSystem(number.upper())
+                    text = f"El sistema de {number} es: {numeric.whichSystemIs()}"
+                    systems = numeric.getSystems()
                     for k in range(len(systems)):
                         currentSystem = systems[k]
-                        digito = Digit(number, currentSystem)
-                        text = text + f", tiene {digito.getSignificantFigures()} cifras significativas en el sistema {currentSystem}"
+                        digit = Digit(number, currentSystem)
+                        text = text + f", tiene {digit.getSignificantFigures()} cifras significativas en el sistema {currentSystem}"
                         elemental = ElementalOperations(number.upper(), currentSystem)
                         text = text + f", operaciones elementales: {elemental.finalResult()}"
                     arrayResults[i][j] = text
