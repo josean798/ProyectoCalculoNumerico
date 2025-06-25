@@ -1,19 +1,62 @@
 import os
 
 class ArchiveUtil():
+    """
+    Clase utilitaria para la gestión de archivos y directorios.
+
+    Atributos:
+        __router (str): Ruta del directorio de trabajo.
+
+    Métodos:
+        getRouter(): Devuelve la ruta actual.
+        getArchive(nameArchive): Devuelve un objeto archivo abierto en modo lectura.
+        getDirectoriesList(): Devuelve la lista de archivos y carpetas en el directorio actual.
+        getSerial(nameArchive): Obtiene el serial de un archivo .bin.
+        setRouter(router): Cambia la ruta del directorio de trabajo.
+        setOrCreateFiles(nameArchive, content, bool): Crea o escribe en un archivo.
+        utilDirectory(router): Valida y establece la ruta del directorio.
+    """
+
     __router = ""
 
     def __init__(self, router = os.getcwd()):#constructor polimorfico
+        """
+        Inicializa la clase ArchiveUtil.
+
+        Args:
+            router (str): Ruta del directorio de trabajo. Por defecto, el directorio actual.
+
+        Raises:
+            Exception: Si la ruta es vacía.
+        """
+
         if (not router or len(router) == 0):
             raise Exception("Manage-Error: La ruta es vacia.")
         self.utilDirectory(router)
 
     #getters    
     def getRouter(self):
+        """
+        Devuelve la ruta actual del directorio de trabajo.
+
+        Returns:
+            str: Ruta del directorio.
+        """
         return str(self.__router)
     
     def getArchive(self, nameArchive):
+        """
+        Devuelve un objeto archivo abierto en modo lectura.
 
+        Args:
+            nameArchive (str): Nombre del archivo (con extensión).
+
+        Returns:
+            file|None: Objeto archivo abierto o None si no se encuentra.
+
+        Raises:
+            Exception: Si el nombre está vacío.
+        """
         if (not nameArchive or len(nameArchive) == 0):
             raise Exception("Manage-Error: El nombre esta Vacio.")
         
@@ -25,7 +68,12 @@ class ArchiveUtil():
             return None
 
     def getDirectoriesList(self):
+        """
+        Devuelve la lista de archivos y carpetas en el directorio actual.
 
+        Returns:
+            list|None: Lista de archivos y carpetas, o None si ocurre un error.
+        """
         try:#usamos try en este constexto ya que OPEN es un objeto externo a nuestra clase
             directories = os.listdir(self.__router)  # Obtiene la lista de archivos y directorios
 
@@ -44,9 +92,16 @@ class ArchiveUtil():
 
     def getSerial(self, nameArchive):
         """
-        *Obtiene el serial de un archivo
-        *@param: string nameArchive = Nombre del archivo
-        *@return: string serial
+        Obtiene el serial de un archivo .bin.
+
+        Args:
+            nameArchive (str): Nombre del archivo.
+
+        Returns:
+            str|None: Serial extraído del nombre o None si ocurre un error.
+
+        Raises:
+            Exception: Si el nombre está vacío o no es .bin.
         """
         if (not nameArchive or len(nameArchive) == 0):
             raise Exception("Manage-Error: El nombre esta Vacio.")
@@ -60,18 +115,32 @@ class ArchiveUtil():
             print("Manage-Error: Error al obtener el serial", e)
         
     #setters
-    """
-    *Cambio de ruta existente
-    *@param: string router = C:\\folder1\\folder2\\folder or r"C:\folder\folder\folder" or C:/folder/folder/folder
-    *@return: 
-    """
     def setRouter(self, router):
+        """
+        Cambia la ruta del directorio de trabajo.
+
+        Args:
+            router (str): Nueva ruta del directorio.
+
+        Raises:
+            Exception: Si la ruta es vacía.
+        """
         if (not router or len(router) == 0):
             raise Exception("Manage-Error: La ruta es vacia.")
         self.utilDirectory(router)
 
     def setOrCreateFiles(self, nameArchive, content = "", bool = False):#metodo polimorfico
+        """
+        Crea o escribe en un archivo.
 
+        Args:
+            nameArchive (str): Nombre del archivo (con extensión).
+            content (str): Contenido a escribir. Si está vacío, crea el archivo.
+            bool (bool): Si es True, agrega salto de línea tras el contenido.
+
+        Raises:
+            Exception: Si el nombre está vacío.
+        """
         if (not nameArchive or len(nameArchive) == 0):
             raise Exception("Manage-Error: El nombre esta Vacio.")
         
@@ -93,7 +162,16 @@ class ArchiveUtil():
 
     #utilitarias
     def utilDirectory(self, router):
-        
+        """
+        Valida y establece la ruta del directorio de trabajo.
+
+        Args:
+            router (str): Ruta a validar.
+
+        Raises:
+            NotADirectoryError: Si la ruta existe pero no es un directorio.
+            FileNotFoundError: Si el directorio no existe.
+        """       
         if (os.path.exists(router) and not os.path.isdir(router)):
             raise NotADirectoryError(f"Manage-Error: La ruta '{router}' no es un directorio.")
         elif (not os.path.exists(router)):
