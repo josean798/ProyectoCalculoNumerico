@@ -2,8 +2,9 @@ import numpy as np
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
-from datetime import datetime
 from ValidateItem.Validate import * 
+from Repositories.myNumbers import myNumbers
+
 
 def iniNumbers(arrayNumbers):
 
@@ -66,6 +67,11 @@ def attachData(archive, arraynumbers):
             arraynumbers[fil][col] = ""    
         fil += 1
 
+def numberProcess():
+    text = "Como prefiere operar \n1.Con numeros \n2.Matrices\nIngrese el indice: "
+    index = validInput(text)
+    return index
+
 def methodProcess():
     text = "Ingrese que metodo desea usar: \n1. Gauss Jordan\n2. Gauss Seidel\nIngrese el indice: "
     index = validInput(text)
@@ -108,3 +114,35 @@ def processResults(index, result, errorList, arraysList, arrayNumbers, arrayResu
     elementalResult = elementalOperations(arrayConverted, errorList, serial, date)
     result = methodSelected(index, arrayConverted, errorList, serial, date)
     return elementalResult,result, arrayNumbers, arrayResults, arrayConverted, serial, archiveObject, errorList, arraysList
+
+def attachFormula(archive, arrayFormulas):
+    archive.seek(0)
+    fil = 0
+    for linea in archive:
+        formula = linea.strip()
+        if formula: 
+            arrayFormulas[fil][0] = formula
+            fil += 1
+
+def numberOrMatrixMethod(index, arrayFormulas, errorlist, serial, date, arraysList, listResults):
+    if index == 1:
+        listResults = validProcessByNumbers(arraysList, arrayFormulas, listResults, errorlist, serial, date)
+        return listResults
+    elif index == 2:
+        listResults = validProcessByMatrix(arraysList,arrayFormulas, listResults, errorlist, serial, date)
+        return listResults
+
+
+def processFormula(index, archFormulaName ,archiveUtilFormula, date, errorlist, arraysList, listResults):
+
+    archObject = archiveUtilFormula.getArchive(archFormulaName)
+    serial = archiveUtilFormula.getSerial(archFormulaName)
+    filcol = archiveQuantities(archObject)
+    fil, col = filcol[0], filcol[1]
+    arrayFormulas = np.empty((fil, col), dtype=object)
+    attachFormula(archObject, arrayFormulas)
+
+    listResults = numberOrMatrixMethod(index, arrayFormulas, errorlist, serial, date, arraysList, listResults)
+    return errorlist, listResults
+    
+    
