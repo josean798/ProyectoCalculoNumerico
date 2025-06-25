@@ -1,10 +1,30 @@
-
 class Binary:
+    """
+    Clase para realizar operaciones elementales en números binarios.
+    
+    Métodos:
+        addition(value1): Suma 1 al número binario dado.
+        substraction(value1): Resta 1 al número binario dado.
+        product(value1): Multiplica el número binario por 1.
+        binaryAdd(a, b): Suma dos números binarios.
+        division(value1): Divide el número binario entre 1.
+    """
+
     def __init__(self):
+        """Inicializa la clase Binary."""
         pass
 
 
     def addition(self, value1):
+        """
+        Suma 1 al número binario dado.
+
+        Args:
+            value1 (str): Número binario como cadena.
+
+        Returns:
+            str: Resultado de la suma en binario.
+        """
         carry = 1
         result = ''
         for bit in reversed(value1):
@@ -21,6 +41,15 @@ class Binary:
         return result.lstrip('0') or '0'
 
     def substraction(self, value1):
+        """
+        Resta 1 al número binario dado.
+
+        Args:
+            value1 (str): Número binario como cadena.
+
+        Returns:
+            str: Resultado de la resta en binario.
+        """
         if value1.lstrip('0') == '0':
             return '0'
         borrow = 1
@@ -38,6 +67,15 @@ class Binary:
 
         
     def product(self, value1):
+        """
+        Multiplica el número binario por 1.
+
+        Args:
+            value1 (str): Número binario como cadena.
+
+        Returns:
+            str: Resultado de la multiplicación en binario.
+        """
         value2='1'
         if not all(c in '01' for c in value1) or not all(c in '01' for c in value2):
             raise ValueError("Solo se aceptan cadenas binarias.")
@@ -53,6 +91,16 @@ class Binary:
         return result.lstrip('0') or '0'
 
     def binaryAdd(self, a, b):
+        """
+        Suma dos números binarios.
+
+        Args:
+            a (str): Primer número binario.
+            b (str): Segundo número binario.
+
+        Returns:
+            str: Resultado de la suma en binario.
+        """
         maxLen = max(len(a), len(b))
         a = a.zfill(maxLen)
         b = b.zfill(maxLen)
@@ -67,6 +115,18 @@ class Binary:
         return result.lstrip('0') or '0'
 
     def division(self, value1):
+        """
+        Divide el número binario entre 1.
+
+        Args:
+            value1 (str): Número binario como cadena.
+
+        Returns:
+            str: Cociente de la división en binario.
+
+        Raises:
+            ValueError: Si el divisor es cero.
+        """
         divisorBin = '1'  
         divisor = 0
         for c in divisorBin:

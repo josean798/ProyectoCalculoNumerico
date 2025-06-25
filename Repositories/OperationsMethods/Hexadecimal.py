@@ -1,9 +1,30 @@
-
 class Hexadecimal:
+    """
+    Clase para realizar operaciones elementales en números hexadecimales.
+
+    Métodos:
+        addition(value1): Suma 1 al número hexadecimal dado.
+        substraction(value1): Resta 1 al número hexadecimal dado.
+        product(value1): Multiplica el número hexadecimal por 1.
+        division(value1): Divide el número hexadecimal entre 1.
+        hexAdd(a, b): Suma dos números hexadecimales.
+        hexMultiplyDigit(value1, digit): Multiplica un número hexadecimal por un dígito hexadecimal.
+    """
+
     def __init__(self):
+        """Inicializa la clase Hexadecimal."""
         pass
 
     def addition(self, value1):
+        """
+        Suma 1 al número hexadecimal dado.
+
+        Args:
+            value1 (str): Número hexadecimal como cadena.
+
+        Returns:
+            str: Resultado de la suma en hexadecimal.
+        """
         if not value1:
             return '1'
         digits = '0123456789ABCDEF'
@@ -24,7 +45,15 @@ class Hexadecimal:
         return result.lstrip('0') or '0'
 
     def substraction(self, value1):
-        
+        """
+        Resta 1 al número hexadecimal dado.
+
+        Args:
+            value1 (str): Número hexadecimal como cadena.
+
+        Returns:
+            str: Resultado de la resta en hexadecimal.
+        """
         if value1 == '0':
             return '-1'
         digits = '0123456789ABCDEF'
@@ -45,6 +74,18 @@ class Hexadecimal:
 
         
     def product(self, value1):
+        """
+        Multiplica el número hexadecimal por 1.
+
+        Args:
+            value1 (str): Número hexadecimal como cadena.
+
+        Returns:
+            str: Resultado de la multiplicación en hexadecimal.
+
+        Raises:
+            ValueError: Si el valor no es una cadena hexadecimal válida.
+        """
         value2 = '1'
         digits = '0123456789ABCDEF'
         if not all(c.upper() in digits for c in value1) or not all(c.upper() in digits for c in value2):
@@ -62,6 +103,16 @@ class Hexadecimal:
         return result.lstrip('0') or '0'
 
     def hexAdd(self, a, b):
+        """
+        Suma dos números hexadecimales.
+
+        Args:
+            a (str): Primer número hexadecimal.
+            b (str): Segundo número hexadecimal.
+
+        Returns:
+            str: Resultado de la suma en hexadecimal.
+        """
         digits = '0123456789ABCDEF'
         maxLen = max(len(a), len(b))
         a = a.zfill(maxLen)
@@ -77,6 +128,16 @@ class Hexadecimal:
         return result.lstrip('0') or '0'
 
     def hexMultiplyDigit(self, value1, digit):
+        """
+        Multiplica un número hexadecimal por un dígito hexadecimal.
+
+        Args:
+            value1 (str): Número hexadecimal como cadena.
+            digit (str): Dígito hexadecimal.
+
+        Returns:
+            str: Resultado de la multiplicación en hexadecimal.
+        """
         digits = '0123456789ABCDEF'
         d = digits.find(digit.upper())
         if d == 0:
@@ -92,6 +153,18 @@ class Hexadecimal:
         return result.lstrip('0') or '0'
     
     def division(self, value1):
+        """
+        Divide el número hexadecimal entre 1.
+
+        Args:
+            value1 (str): Número hexadecimal como cadena.
+
+        Returns:
+            str: Cociente de la división en hexadecimal.
+
+        Raises:
+            ValueError: Si el divisor es cero.
+        """
         digits = '0123456789ABCDEF'
         divisorHex = '1'  
         divisor = 0
