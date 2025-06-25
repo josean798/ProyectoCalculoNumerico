@@ -1,9 +1,29 @@
 class Convertor:
+    """
+    Clase para convertir números entre sistemas binario, decimal y hexadecimal.
+    
+    Métodos:
+        binaryToDecimal(iniValue): Convierte un número binario a decimal.
+        hexadecimalToDecimal(iniValue): Convierte un número hexadecimal a decimal.
+        decimalToBinary(iniValue): Convierte un número decimal a binario.
+        decimalToHexadecimal(iniValue): Convierte un número decimal a hexadecimal.
+    """
+    
     def __init__(self):
+        """Inicializa la clase Convertor."""
         pass
 
     @staticmethod
     def binaryToDecimal(iniValue):
+        """
+        Convierte un número binario a decimal.
+
+        Args:
+            iniValue (str): Número binario como cadena (puede tener signo negativo).
+
+        Returns:
+            int: Valor decimal correspondiente.
+        """
         sign = 1
         if iniValue.startswith('-'):
             sign = -1
@@ -18,6 +38,15 @@ class Convertor:
     
     @staticmethod
     def hexadecimalToDecimal(iniValue):
+        """
+        Convierte un número hexadecimal a decimal.
+
+        Args:
+            iniValue (str): Número hexadecimal como cadena (puede tener signo negativo).
+
+        Returns:
+            int: Valor decimal correspondiente.
+        """
         sign = 1
         if iniValue.startswith('-'):
             sign = -1
@@ -51,6 +80,15 @@ class Convertor:
     
     @staticmethod
     def decimalToBinary(iniValue):
+        """
+        Convierte un número decimal a binario.
+
+        Args:
+            iniValue (str|int): Número decimal como cadena o entero (puede tener signo negativo).
+
+        Returns:
+            str: Representación binaria del número.
+        """
         sign = ''
         value = iniValue
         if isinstance(value, str):
@@ -69,6 +107,15 @@ class Convertor:
 
     @staticmethod
     def decimalToHexadecimal(iniValue):
+        """
+        Convierte un número decimal a hexadecimal.
+
+        Args:
+            iniValue (str|int): Número decimal como cadena o entero (puede tener signo negativo).
+
+        Returns:
+            str: Representación hexadecimal del número.
+        """
         sign = ''
         value = iniValue
         if isinstance(value, str):
@@ -99,10 +146,3 @@ class Convertor:
                     hexadecimal = 'F' + hexadecimal
             value //= 16
         return sign + hexadecimal if hexadecimal else sign + '0'
-
-    @staticmethod
-    def calculateMCD(a, b):
-        a, b = abs(a), abs(b)
-        while(b):
-            a, b = b, a % b
-        return a

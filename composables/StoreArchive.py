@@ -34,3 +34,10 @@ def createArchiveError(errorList, routeLog, date):
     if errorList is not None:
         for error in errorList:
             routeLog.setOrCreateFiles(nameArchive, error, True)
+
+def createArchiveListResult(listResults, archiveUtil, serialArchive, date):
+    randomNumber = randint(1,1000-1)
+    nameArchive = serialArchive + "_" + date +"_"+"serial"+ str(randomNumber)+".txt" 
+    if listResults is not None:
+        for result in listResults:
+            archiveUtil.setOrCreateFiles(nameArchive, result, True)
