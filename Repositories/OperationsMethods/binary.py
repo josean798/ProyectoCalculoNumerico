@@ -85,13 +85,3 @@ class Binary:
 
         quotient = quotient.lstrip('0') or '0'
         return quotient
-
-    @staticmethod
-    def greaterOrEquals(a, b):
-        a = a.lstrip('0') or '0'
-        b = b.lstrip('0') or '0'
-        if len(a) > len(b):
-            return True
-        if len(b) > len(a):
-            return False
-        return a >= b

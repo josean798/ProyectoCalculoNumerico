@@ -99,10 +99,3 @@ class Convertor:
                     hexadecimal = 'F' + hexadecimal
             value //= 16
         return sign + hexadecimal if hexadecimal else sign + '0'
-
-    @staticmethod
-    def calculateMCD(a, b):
-        a, b = abs(a), abs(b)
-        while(b):
-            a, b = b, a % b
-        return a

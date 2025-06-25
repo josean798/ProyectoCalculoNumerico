@@ -111,20 +111,3 @@ class Hexadecimal:
 
         quotient = quotient.lstrip('0') or '0'
         return quotient
-
-    def greaterOrEqualsHex(self, a, b):
-        a = a.lstrip('0') or '0'
-        b = b.lstrip('0') or '0'
-        if len(a) > len(b):
-            return True
-        if len(b) > len(a):
-            return False
-        digits = '0123456789ABCDEF'
-        for i in range(len(a)):
-            d1 = digits.find(a[i].upper())
-            d2 = digits.find(b[i].upper())
-            if d1 > d2:
-                return True
-            if d1 < d2:
-                return False
-        return True

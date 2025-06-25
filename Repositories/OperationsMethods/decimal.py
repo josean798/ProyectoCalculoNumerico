@@ -1,20 +1,21 @@
-from Repositories.OperationsMethods.operation import Operation
-
-class Decimal(Operation):
+class Decimal():
     def __init__(self):
         pass
-    
+
     def addition(self, value1):
-        self.validateDecimal(value1)
+        if not isinstance(value1, (int, float)):
+            raise TypeError("El valor decimal debe ser numérico")
         return value1 + 1
     
     def substraction(self, value1):
-        self.validateDecimal(value1)
+        if not isinstance(value1, (int, float)):
+            raise TypeError("El valor decimal debe ser numérico")
         return value1 - 1
     
     
     def product(self, value1):
-        self.validateDecimal(value1)
+        if not isinstance(value1, (int, float)):
+            raise TypeError("El valor decimal debe ser numérico")
         multiplicador=1
         resultado = 0
         negativo = (multiplicador < 0)
@@ -26,7 +27,6 @@ class Decimal(Operation):
         if isinstance(value1, float) and not value1.is_integer():
             value1 = round(value1)
         divisor = 1
-        self.validateDecimal(value1)
         digits = '0123456789'
         if isinstance(divisor, str):
             divisor = int(divisor)
