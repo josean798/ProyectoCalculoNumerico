@@ -32,7 +32,7 @@ def ProcessMain(routeInput, routeOutput, routeLog, formulaDir, date, errorList, 
 
             elementalOperations, resultGauss, arrayNumbers, arrayResults, arrayConverted, serial, archObject, errorList, arraysList = processResults(index, resultGauss, errorList, arraysList, arrayNumbers, arrayResults, arrayConverted, archiveUtilInput, archiveName, serial, date, elementalOperations)
             
-            storeMain(arrayResults, serial, archiveUtilOut, arhiveUtilLog, date, errorList, resultGauss, elementalOperations)
+            storeMain(arrayResults, serial, archiveUtilOut, date, resultGauss, elementalOperations)
             archObject.close()
 
 
@@ -41,6 +41,7 @@ def ProcessMain(routeInput, routeOutput, routeLog, formulaDir, date, errorList, 
             continue
         if validArchiveName(archiveFormulaName) and validContentArchive(archiveUtilFormula.getArchive(archiveFormulaName), archiveFormulaName):
             errorList, listResults = processFormula(indexOperations, archiveFormulaName, archiveUtilFormula, date, errorList, arraysList, listResults)
-            serialFormula = archiveUtilFormula.getSerial(archiveFormulaName)  
+            serialFormula = archiveUtilFormula.getSerial(archiveFormulaName)
+              
     createArchiveListResult(listResults, archiveUtilOut, serialFormula, date)
     createArchiveError(errorList, arhiveUtilLog, date)

@@ -129,17 +129,24 @@ class GaussSeidel:
         Raises:
             ValueError: Si el método no converge en el número máximo de iteraciones.
         """
-        x = np.array([0.0 for i in range(self.n)])
+        x = np.array([0.0 for i in range(self.n)], dtype=np.float64)
         for iteration in range(self.__maxIterations):
-            xNew = np.array(x, dtype=float)
-            for i in range(self.n):
-                sum1 = 0 
-                for j in range(i):
-                    sum1 += self.__matrix[i, j] * xNew[j]  
-                sum2 = 0  
-                for j in range(i + 1, self.n):
-                    sum2 += self.__matrix[i, j] * x[j]  
-                xNew[i] = (self.__vector[i] - sum1 - sum2) / self.__matrix[i, i]
+            xNew = np.array(x, dtype=np.float64)
+            try:
+                for i in range(self.n):
+                    sum1 = 0 
+                    for j in range(i):
+                        sum1 += self.__matrix[i, j] * xNew[j]  
+                    sum2 = 0  
+                    for j in range(i + 1, self.n):
+                        sum2 += self.__matrix[i, j] * x[j]  
+                    if self.__matrix[i, i] == 0:
+                        raise ZeroDivisionError(f"División por cero en la diagonal en la fila {i}")
+                    xNew[i] = (self.__vector[i] - sum1 - sum2) / self.__matrix[i, i]
+            except FloatingPointError as e:
+                raise OverflowError(f"Overflow numérico detectado en la iteración {iteration}: {e}")
+            if np.any(np.isnan(xNew)) or np.any(np.isinf(xNew)):
+                raise OverflowError("Overflow numérico o valor inválido detectado en la iteración Gauss-Seidel.")
             if self.maxAbsoluteDiff(xNew, x) < self.__tolerance:
                 return xNew
             x = xNew

@@ -124,8 +124,8 @@ def validMatrixGaussJordan(arrayConverted, errorList, serial, date):
         data = f"{' '.join(str(x) for fila in arrayConverted for x in fila)}"
         location = f"validMatrixGaussJordan()"
         validErrorRegister(errorList, serial, errorName , exception, data, location, date)
-        solution = f"Infinitas soluciones o no tiene solución"
-        return solution
+        sol = f"Infinitas soluciones o no tiene solución"
+        return sol
 
 def validMatrixGaussSeidel(arrayConverted, errorList, serial, date): 
     try:
@@ -203,7 +203,7 @@ def validProcessByNumbers(arraysList, arrayFormulas, listResults, errorList, ser
     except Exception as e:    
         errorName = type(e).__name__
         exception = str(e)
-        data = f"{' '.join(str(x) for fila in arraysList.getData() for x in fila)}"
+        data = f"{' '.join(str(x) for fila in arraysList for x in fila)}"
         location = f"validProcessByNumbers()"
         validErrorRegister(errorList, serial, errorName , exception, data, location, date)
     return listResults    
@@ -238,7 +238,7 @@ def validProcessByMatrix(arraysList, arrayFormulas, listResults, errorList, seri
         data = "No se pudieron extraer tres matrices de arraysList"
         location = "validProcessByMatrix()"
         validErrorRegister(errorList, serial, errorName, exception, data, location, date)
-        text = f"Error al procesar las matrices: {str(e)}"
+        text = f"No se pudo procesar: {str(e)}"
         listResults.insert(text)
 
     return listResults

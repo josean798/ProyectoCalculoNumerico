@@ -167,15 +167,15 @@ class MyMatrix:
         if isinstance(left, np.ndarray) and isinstance(right, np.ndarray):
             if operator == '+': 
                 if left.shape != right.shape:
-                    raise ValueError("Dimensiones incompatibles para suma, { (m, n), (p, q) } donde (m, n) ≠ (p, q)")
+                    raise ValueError("Dimensiones incompatibles para suma, { (m, n), (p, q) } : (m, n) ≠ (p, q)")
                 return left + right
             elif operator == '-':
                 if left.shape != right.shape:
-                    raise ValueError("Dimensiones incompatibles para resta, { (m, n), (p, q) } donde (m, n) ≠ (p, q)")
+                    raise ValueError("Dimensiones incompatibles para resta, { (m, n), (p, q) } : (m, n) ≠ (p, q)")
                 return left - right
             elif operator == '*':
                 if left.shape[1] != right.shape[0]:
-                    raise ValueError("Dimensiones incompatibles para multiplicación: { (m, n), (p, q) } donde n ≠ p")
+                    raise ValueError("Dimensiones incompatibles para multiplicación: { (m, n), (p, q) } : n ≠ p")
                 return np.dot(left, right)
             elif operator == '/':
                 try:
