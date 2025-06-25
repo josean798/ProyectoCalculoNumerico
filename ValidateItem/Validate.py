@@ -11,7 +11,8 @@ from Repositories.gaussSeidel import *
 from Repositories.matrixOperations import *
 import re
 import numpy as np 
-
+from Repositories.myNumbers import myNumbers
+from Repositories.myMatrix import MyMatrix
 
 def validErrorRegister(errorList, serial, errorName, exception, data, location, date):
     if errorList is None:
@@ -157,4 +158,87 @@ def validContentArchive(archive, archiveName):
         print(f"Verifique que el archivo {archiveName} no este vacio")
         return False
     return True
-    
+
+def validConvertToFloat(arrayConverted, errorList, serial, date):
+    try:
+        floatMatrix = np.empty(arrayConverted.shape, dtype=float)
+
+        for r in range(len(arrayConverted)):
+            for c in range(len(arrayConverted[0])):
+                floatMatrix[r, c] = float(arrayConverted[r, c])
+    except Exception as e:
+        errorName = type(e).__name__
+        exception = str(e)
+        data = f"{' '.join(str(x) for fila in arrayConverted for x in fila)}"
+        location = f"validConvertToFloat()"
+        validErrorRegister(errorList, serial, errorName , exception, data, location, date)
+        floatMatrix = np.empty(arrayConverted.shape, dtype=float)    
+    return floatMatrix
+
+
+
+def validProcessByNumbers(arraysList, arrayFormulas, listResults, errorList, serial, date):
+    try:
+        nodo = arraysList.getNode()
+        while nodo is not None:
+            matriz = nodo.data
+            for fila in matriz:
+                n = len(fila)
+                num_minis = n // 3 + (1 if n % 3 != 0 else 0)
+                mini_arreglos = np.empty((num_minis, 3), dtype=object)
+                for idx, i in enumerate(range(0, n, 3)):
+                    for j in range(3):
+                        if i + j < n:
+                            mini_arreglos[idx, j] = fila[i + j]
+                        else:
+                            mini_arreglos[idx, j] = "0"
+                for fidx in range(arrayFormulas.shape[0]):
+                    formula = str(arrayFormulas[fidx][0])
+                    for mini in mini_arreglos:
+                        calc = myNumbers(mini, formula)
+                        resultado = calc.evaluate()  
+                        text = f"Resultado para {mini} con fórmula '{formula}': {resultado}"
+                        listResults.insert(text)
+            nodo = nodo.next
+    except Exception as e:    
+        errorName = type(e).__name__
+        exception = str(e)
+        data = f"{' '.join(str(x) for fila in arraysList.getData() for x in fila)}"
+        location = f"validProcessByNumbers()"
+        validErrorRegister(errorList, serial, errorName , exception, data, location, date)
+    return listResults    
+
+def validProcessByMatrix(arraysList, arrayFormulas, listResults, errorList, serial, date):
+    try:
+        
+        
+        nodo = arraysList.getNode()
+        
+        matrizA = nodo.data
+        matrizB = nodo.next.data
+        matrizC = nodo.next.next.data
+        matrizA = validConvertToFloat(matrizA, errorList, serial, date)
+        matrizB = validConvertToFloat(matrizB, errorList, serial, date)
+        matrizC = validConvertToFloat(matrizC, errorList, serial, date)
+        for fidx in range(arrayFormulas.shape[0]):
+            
+            
+            formula = str(arrayFormulas[fidx][0])
+            
+            calc = MyMatrix(matrizA, matrizB, matrizC, formula)
+            resultado = calc.evaluate()
+                
+            text = f"Resultado para fórmula '{formula}': {resultado}"
+                
+            listResults.insert(text)
+            
+    except Exception as e:
+        errorName = type(e).__name__
+        exception = str(e)
+        data = "No se pudieron extraer tres matrices de arraysList"
+        location = "validProcessByMatrix()"
+        validErrorRegister(errorList, serial, errorName, exception, data, location, date)
+        text = f"Error al procesar las matrices: {str(e)}"
+        listResults.insert(text)
+
+    return listResults

@@ -1,7 +1,7 @@
 import numpy as np
-from stack import Stack
-from myQueue import Queue
-from myReplace import myReplace
+from Structure.stack import Stack
+from Structure.myQueue import Queue
+from Structure.myReplace import myReplace
 
 class MyMatrix:
     def __init__(self, matrizA, matrizB, matrizC, formula):
@@ -9,7 +9,7 @@ class MyMatrix:
         self._matrizB = matrizB
         self._matrizC = matrizC
         formula_replacer_space = myReplace(formula)
-        self._formula = formula_replacer_space.getReplace(" ", "").lower
+        self._formula = formula_replacer_space.getReplace(" ", "").lower()
         self.validate()
 
     def validate(self):
@@ -73,9 +73,8 @@ class MyMatrix:
     def evaluateRpn(self, rpnQueue):
         stack = Stack()
 
-        while not rpnQueue.is_empty():
+        while not rpnQueue.isEmpty():
             token = rpnQueue.dequeue()
-            # Si tu Queue devuelve un Node, usa token = token.data
 
             if token in {'a', 'b', 'c'}:
                 stack.push(self.getMatrix(token))
@@ -93,37 +92,34 @@ class MyMatrix:
         return stack.pop()
 
     def performOperation(self, left, right, operator):
-        # Operaciones entre matrices
+    
         if isinstance(left, np.ndarray) and isinstance(right, np.ndarray):
             if operator == '+': 
                 if left.shape != right.shape:
-                    raise ValueError("Dimensiones incompatibles para suma")
+                    raise ValueError("Dimensiones incompatibles para suma, { (m, n), (p, q) } donde (m, n) ≠ (p, q)")
                 return left + right
             elif operator == '-':
                 if left.shape != right.shape:
-                    raise ValueError("Dimensiones incompatibles para resta")
+                    raise ValueError("Dimensiones incompatibles para resta, { (m, n), (p, q) } donde (m, n) ≠ (p, q)")
                 return left - right
             elif operator == '*':
                 if left.shape[1] != right.shape[0]:
-                    raise ValueError("Dimensiones incompatibles para multiplicación")
+                    raise ValueError("Dimensiones incompatibles para multiplicación: { (m, n), (p, q) } donde n ≠ p")
                 return np.dot(left, right)
             elif operator == '/':
                 try:
                     return np.dot(left, np.linalg.inv(right))
                 except np.linalg.LinAlgError:
-                    raise ValueError("Matriz no invertible")
+                    raise ValueError("Matriz no invertible: no se puede calcular la inversa de la matriz { (p, q) }")
         
-        # Operaciones matriz-escalar
         elif isinstance(left, np.ndarray) and isinstance(right, (int, float)):
             if operator == '*': return left * right
             elif operator == '/': return left / right
         
-        # Operaciones escalar-matriz
         elif isinstance(left, (int, float)) and isinstance(right, np.ndarray):
             if operator == '*': return left * right
-            else: raise ValueError("Operación no soportada entre escalar y matriz")
+            else: raise ValueError("Operación no soportada entre escalar y matriz: { escalar, (m, n) }")
         
-        # Operaciones entre escalares
         else:
             if operator == '+': return left + right
             elif operator == '-': return left - right
@@ -133,32 +129,6 @@ class MyMatrix:
                 return left / right
 
     def evaluate(self):
-        """Método público para evaluar la fórmula"""
         rpnQueue = self.shuntingYard()
         return self.evaluateRpn(rpnQueue)
 
-# Ejemplo de uso
-if __name__ == "__main__":
-    matrizA = np.array([[1, 2], [3, 4]])
-    matrizB = np.array([[5, 6], [7, 8]])
-    matrizC = np.array([[9, 10], [11, 12]])
-
-    tests = [
-        ("a*b", "Multiplicación de matrices"),
-        ("(a+b)*c", "Suma y multiplicación"),
-        ("a*2 + b/3", "Operaciones mixtas"),
-        ("2*a + b", "Escalar con matriz"),
-        ("a*(b+c)", "Paréntesis anidados"),
-        ("a", "Solo matriz A")
-    ]
-
-    for formula, desc in tests:
-        print(f"\n--- {desc} ('{formula}') ---")
-        try:
-            calc = MyMatrix(matrizA, matrizB, matrizC, formula)
-            result = calc.evaluate()
-            print("Resultado:")
-            print(result)
-        except Exception as e:
-            print(f"Error: {str(e)}")
-    

@@ -9,14 +9,14 @@ class Queue:
         self._items.insertAt(item, self._items.getSize())
 
     def dequeue(self):
-        if self.is_empty():
+        if self.isEmpty():
             raise IndexError("Dequeue from empty queue")
         node = self._items.removeAt(0)  # Elimina el nodo de la lista
         return node.data  # Devuelve solo el dato, no el Node
 
     def front(self):
         """Devuelve el primer elemento sin desencolar"""
-        if self.is_empty():
+        if self.isEmpty():
             raise IndexError("Front from empty queue")
         return self._items.getNodeByPos(0).data
 
