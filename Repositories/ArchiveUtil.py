@@ -149,9 +149,9 @@ class ArchiveUtil():
             if (not content or len(content) == 0):
                 archive = open(self.__router+"\\"+nameArchive+".txt", "x")
                 return
-            
-            archive = open(self.__router+"\\"+nameArchive, "a")#requiere que el nombre venga con su extencion. 
-            
+
+            archive = open(self.__router+"\\"+nameArchive, "a", encoding="utf-8")#requiere que el nombre venga con su extencion.
+
             if (bool == True):
                 archive.write(content+"\n")
             else:
