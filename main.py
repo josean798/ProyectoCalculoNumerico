@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from Process.ProcessMain import ProcessMain
-from Structure.myDate import myDate
+from Structure.MyDate import myDate
 from Structure.myReplace import myReplace
 from Structure.myList import myList
 
