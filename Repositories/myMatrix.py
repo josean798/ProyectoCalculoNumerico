@@ -4,7 +4,29 @@ from Structure.myQueue import Queue
 from Structure.myReplace import myReplace
 
 class MyMatrix:
+    """
+    Clase para evaluar expresiones matriciales usando matrices A, B y C y una fórmula en notación infija.
+
+    Atributos:
+        _matrizA (np.ndarray): Matriz A.
+        _matrizB (np.ndarray): Matriz B.
+        _matrizC (np.ndarray): Matriz C.
+        _formula (str): Fórmula en notación infija usando 'a', 'b', 'c', números y operadores +, -, *, /, ().
+    """
+
     def __init__(self, matrizA, matrizB, matrizC, formula):
+        """
+        Inicializa un objeto MyMatrix.
+
+        Args:
+            matrizA (np.ndarray): Matriz A (puede ser de strings o floats, se recomienda convertir a float).
+            matrizB (np.ndarray): Matriz B (puede ser de strings o floats, se recomienda convertir a float).
+            matrizC (np.ndarray): Matriz C (puede ser de strings o floats, se recomienda convertir a float).
+            formula (str): Fórmula en notación infija usando 'a', 'b', 'c', números y operadores +, -, *, /, ().
+
+        Raises:
+            ValueError: Si las matrices no son numpy arrays o la fórmula contiene caracteres inválidos.
+        """
         self._matrizA = matrizA
         self._matrizB = matrizB
         self._matrizC = matrizC
@@ -13,12 +35,30 @@ class MyMatrix:
         self.validate()
 
     def validate(self):
+        """
+        Valida que las matrices sean numpy arrays y que la fórmula solo contenga caracteres válidos.
+
+        Raises:
+            ValueError: Si las matrices no son numpy arrays o la fórmula contiene caracteres inválidos.
+        """
         if not all(isinstance(m, np.ndarray) for m in [self._matrizA, self._matrizB, self._matrizC]):
             raise ValueError("Las matrices deben ser numpy arrays")
         if not all(c in "abc0123456789+-*/()" for c in self._formula):
             raise ValueError("Caracteres inválidos en la fórmula")
 
     def getMatrix(self, char):
+        """
+        Devuelve la matriz correspondiente al carácter dado ('a', 'b', 'c') o el valor numérico si es un número.
+
+        Args:
+            char (str): 'a', 'b', 'c' o un número como string.
+
+        Returns:
+            np.ndarray o float: Matriz correspondiente o valor numérico.
+
+        Raises:
+            ValueError: Si el operando no es válido.
+        """
         if char == 'a': return self._matrizA
         if char == 'b': return self._matrizB
         if char == 'c': return self._matrizC
@@ -28,6 +68,12 @@ class MyMatrix:
             raise ValueError(f"Operando inválido: '{char}'")
 
     def shuntingYard(self):
+        """
+        Convierte la fórmula infija a notación postfija (RPN) usando el algoritmo de Shunting Yard.
+
+        Returns:
+            Queue: Cola con la expresión en notación postfija.
+        """
         precedence = {'*': 3, '/': 3, '+': 2, '-': 2}
         output = Queue()
         operators = Stack()
@@ -71,6 +117,18 @@ class MyMatrix:
         return output
 
     def evaluateRpn(self, rpnQueue):
+        """
+        Evalúa una expresión en notación postfija (RPN) usando una pila.
+
+        Args:
+            rpnQueue (Queue): Cola con la expresión en notación postfija.
+
+        Returns:
+            np.ndarray o float: Resultado de la evaluación.
+
+        Raises:
+            ValueError: Si faltan operandos o la expresión está mal formada.
+        """
         stack = Stack()
 
         while not rpnQueue.isEmpty():
@@ -92,7 +150,20 @@ class MyMatrix:
         return stack.pop()
 
     def performOperation(self, left, right, operator):
-    
+        """
+        Realiza una operación entre dos operandos, que pueden ser matrices o escalares.
+
+        Args:
+            left (np.ndarray o float): Operando izquierdo.
+            right (np.ndarray o float): Operando derecho.
+            operator (str): Operador ('+', '-', '*', '/').
+
+        Returns:
+            np.ndarray o float: Resultado de la operación.
+
+        Raises:
+            ValueError: Si las dimensiones no son compatibles o la operación no es soportada.
+        """
         if isinstance(left, np.ndarray) and isinstance(right, np.ndarray):
             if operator == '+': 
                 if left.shape != right.shape:
@@ -129,6 +200,14 @@ class MyMatrix:
                 return left / right
 
     def evaluate(self):
+        """
+        Evalúa la fórmula almacenada usando las matrices y retorna el resultado.
+
+        Returns:
+            np.ndarray o float: Resultado de la evaluación de la fórmula.
+
+        Raises:
+            ValueError: Si la Si la expresión es inválida.
+        """
         rpnQueue = self.shuntingYard()
         return self.evaluateRpn(rpnQueue)
-

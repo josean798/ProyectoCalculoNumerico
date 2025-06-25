@@ -3,6 +3,18 @@ from Structure.myList import myList
 from Structure.myReplace import myReplace
 
 class myNumbers:
+    """
+    Clase para evaluar fórmulas matemáticas con hasta tres variables (A, B, C) y una lista de números.
+
+    Atributos:
+        __numbersList (np.ndarray): Arreglo de números (como float) usados en la fórmula.
+        __A (float): Primer número de la lista.
+        __B (float): Segundo número de la lista.
+        __C (float): Tercer número de la lista.
+        __formula (str): Fórmula matemática a evaluar.
+        __result (float): Resultado de la evaluación de la fórmula.
+    """
+
     __numbersList = np.array([])
     __A = 0
     __B = 0
@@ -11,6 +23,16 @@ class myNumbers:
     __result = 0
 
     def __init__(self, numbers, formula):
+        """
+        Inicializa un objeto myNumbers.
+
+        Args:
+            numbers (array-like): Lista de números (pueden ser strings o floats).
+            formula (str): Fórmula matemática a evaluar, usando A, B, C como variables.
+
+        Raises:
+            ValueError: Si la fórmula o los números no son válidos.
+        """
         # Convertir todos los elementos a float si vienen como string
         self.__numbersList = np.array([float(n) for n in numbers])
         formula_replacer = myReplace(formula)
@@ -25,6 +47,12 @@ class myNumbers:
             self.__C = self.__numbersList[2]
 
     def validateFormula(self):
+        """
+        Valida que la fórmula solo contenga caracteres permitidos y no tenga operadores consecutivos.
+
+        Raises:
+            ValueError: Si la fórmula contiene caracteres no válidos o operadores consecutivos.
+        """
         validChars = "aAbBcC0123456789-+/*()"
         for char in self.__formula:
             if char not in validChars:
@@ -35,11 +63,23 @@ class myNumbers:
                 raise ValueError("Operadores consecutivos no permitidos")
 
     def validateNumbers(self):
+        """
+        Valida que todos los elementos de la lista de números sean de tipo float o int.
+
+        Raises:
+            ValueError: Si algún elemento no es un número.
+        """
         for i in range(len(self.__numbersList)):
             if not isinstance(self.__numbersList[i], (float, int)):
                 raise ValueError("Los miembros del arreglo deben ser números")
 
     def replaceFormula(self):
+        """
+        Reemplaza las variables A, B y C en la fórmula por sus valores numéricos.
+
+        Returns:
+            str: Fórmula con los valores numéricos sustituidos.
+        """
         replacer_a = myReplace(self.__formula)
         formula_with_a = replacer_a.getReplace("a", str(self.__A))
         
@@ -52,16 +92,43 @@ class myNumbers:
         return formula
 
     def evaluate(self):
+        """
+        Evalúa la fórmula matemática con los valores actuales de A, B y C.
+
+        Returns:
+            float: Resultado de la evaluación.
+        """
         self.__result = self.evaluateExpression(self.replaceFormula())
         return self.__result
 
     def evaluateExpression(self, expr):
+        """
+        Evalúa una expresión matemática, resolviendo primero los paréntesis.
+
+        Args:
+            expr (str): Expresión matemática a evaluar.
+
+        Returns:
+            float: Resultado de la evaluación.
+        """
         while '(' in expr:
             expr = self.evaluateParentheses(expr)
         tokens = self.tokenize(expr)
         return self.calculate(tokens)
 
     def evaluateParentheses(self, expr):
+        """
+        Evalúa la subexpresión dentro del paréntesis más interno.
+
+        Args:
+            expr (str): Expresión matemática con paréntesis.
+
+        Returns:
+            str: Expresión con el paréntesis resuelto.
+
+        Raises:
+            ValueError: Si los paréntesis no están balanceados.
+        """
         start = expr.rfind('(')
         end = expr.find(')', start)
         if start == -1 or end == -1:
@@ -71,6 +138,15 @@ class myNumbers:
         return expr[:start] + str(subResult) + expr[end + 1:]
 
     def tokenize(self, expr):
+        """
+        Convierte una expresión matemática en una lista de tokens (números y operadores).
+
+        Args:
+            expr (str): Expresión matemática.
+
+        Returns:
+            myList: Lista de tokens.
+        """
         tokens = myList()
         currentToken = ""
         for char in expr:
@@ -86,6 +162,18 @@ class myNumbers:
         return tokens
 
     def calculate(self, tokens):
+        """
+        Calcula el resultado de una lista de tokens (expresión matemática).
+
+        Args:
+            tokens (myList): Lista de tokens (números y operadores).
+
+        Returns:
+            float: Resultado de la evaluación.
+
+        Raises:
+            ZeroDivisionError: Si ocurre una división por cero.
+        """
         i = 0
         while i < tokens.getSize():
             token = tokens.getNodeByPos(i).data
@@ -117,11 +205,3 @@ class myNumbers:
                 result -= right
             i += 2
         return result
-
-# Ejemplo de uso con números como string:
-numbers = np.array(["10", "2.5", "5"])  
-formula = "(2 + A) * B - C"  
-
-calc = myNumbers(numbers, formula)
-result = calc.evaluate()
-print(f"Resultado de la fórmula {formula}: {result}")
